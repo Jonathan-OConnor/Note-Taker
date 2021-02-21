@@ -34,6 +34,12 @@ app.post(`/api/notes`, function(req,res){
     res.send(note)
 })
 
+app.delete(`/api/notes/:id`, function(req, res){
+    let uuid= req.params.id
+    noteList.splice(noteList.findIndex(note => note.id == uuid), 1)
+    fs.writeFileSync(saveFile, JSON.stringify(noteList))
+    res.sendFile(__dirname + `/public/notes.html`)
+})
 app.get(`*`, function(req, res){
     res.sendFile(__dirname + '/public/index.html')
 })
