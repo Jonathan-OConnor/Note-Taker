@@ -85,6 +85,8 @@ const handleNoteDelete = (e) => {
 
   if (activeNote.id === noteId) {
     activeNote = {};
+    noteTitle.removeAttribute('readonly');
+    noteText.removeAttribute('readonly');
   }
 
   deleteNote(noteId).then(() => {
@@ -96,13 +98,20 @@ const handleNoteDelete = (e) => {
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
   e.preventDefault();
-  activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+  if (e.target.parentElement.getAttribute(`data-note`)){
+    activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+  } else {
+    activeNote = {}
+  }
+  
   renderActiveNote();
 };
 
 // Sets the activeNote to and empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
   activeNote = {};
+  noteTitle.removeAttribute('readonly');
+  noteText.removeAttribute('readonly');
   renderActiveNote();
 };
 
