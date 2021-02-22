@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const saveFile = `./.db/.db.json`
-const PORT = 3000; // for Heroku ? process.env.PORT || 3000
+const PORT = process.env.PORT || 3000
 
 let noteList = fs.existsSync(saveFile) ?
     JSON.parse(fs.readFileSync(saveFile)) : []
